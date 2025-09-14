@@ -113,9 +113,9 @@
     </div>
   </div>
   <script>
-    document.getElementById('registrationForm').onsubmit = async function(freefireform){
-      freefireform.preventDefault();
-      const form = freefireform.target;
+    document.getElementById('registrationForm').onsubmit = async function(e){
+      e.preventDefault();
+      const form = e.target;
       const data = {
         "team_name": form.team_name.value,
         "captain_name": form.captain_name.value,
@@ -128,7 +128,7 @@
         "player3_contact": form.player3_contact.value,
       };
       // Google Apps Script endpoint URL
-      const endpoint = "https://script.google.com/macros/s/AKfycbwQrcyZeFZi8RtKlRX-ppXfOSY1IWttHDXa1BeP99ejvdPXniQzbkuAw3-VtBIr8SDw/exec";
+      const endpoint = "https://script.google.com/macros/s/AKfycbwGHjk-hcq1k-nj9vmDQgDG0pc1hVG8nuroRWDuaFpAdKyvmwQ5Cq5-EF2t4rzxH4iY/exec";
       try {
         const res = await fetch(endpoint, {
           method: "POST",
@@ -145,6 +145,7 @@
   </script>
 </body>
 </html>
+
 
 
 
