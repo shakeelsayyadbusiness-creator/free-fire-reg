@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Free Fire Tournament Registration</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body {
+      background: url('https://media.pocketgamer.com/artwork/na-30551-1582549493/garena-free-fire-ios-artwork-new-skins_jpg_640.webp') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .form-container {
+      background: rgba(22, 22, 22, 0.85);
+      color: #fff;
+      margin: 4% auto;
+      width: 400px;
+      border-radius: 20px;
+      padding: 30px 28px 40px 28px;
+      box-shadow: 0 8px 30px rgb(0 0 0 / 35%);
+    }
+    .title {
+      font-size: 2.3em;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      text-align: center;
+      color: #ffb84c;
+    }
+    .subtitle {
+      font-size: 1.6em;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    input[type="text"], input[type="tel"] {
+      width: 100%;
+      margin-bottom: 16px;
+      padding: 10px;
+      border: none;
+      border-radius: 14px;
+      font-size: 1.05em;
+      color: #333;
+      background: #fff9e9;
+      box-sizing: border-box;
+      outline: none;
+    }
+    label {
+      display: block;
+      margin-bottom: 3px;
+      font-weight: 600;
+      color: #ffb84c;
+    }
+    .submit-btn {
+      width: 100%;
+      background: #222;
+      color: #ffb84c;
+      font-size: 1.2em;
+      padding: 12px 0;
+      border-radius: 13px;
+      border: none;
+      font-weight: bold;
+      letter-spacing: 1px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+    .submit-btn:hover {
+      background: #be864d;
+      color: #fff;
+    }
+    .footer {
+      margin-top: 32px;
+      text-align: center;
+      color: #fff;
+      font-size: 1.2em;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div class="title">FREE FIRE</div>
+    <div class="subtitle">TOURNAMENT</div>
+    <form id="registrationForm">
+      <label>Team Name</label>
+      <input type="text" name="team_name" required placeholder="Team Name">
+      
+      <label>Captain Name</label>
+      <input type="text" name="captain_name" required placeholder="Captain Name">
+      <input type="tel" name="captain_contact" required placeholder="Captain Contact Number">
+      
+      <label>Player 1 Name & Contact</label>
+      <input type="text" name="player1_name" required placeholder="Player 1 Name">
+      <input type="tel" name="player1_contact" required placeholder="Player 1 Contact Number">
+      
+      <label>Player 2 Name & Contact</label>
+      <input type="text" name="player2_name" required placeholder="Player 2 Name">
+      <input type="tel" name="player2_contact" required placeholder="Player 2 Contact Number">
+      
+      <label>Player 3 Name & Contact</label>
+      <input type="text" name="player3_name" required placeholder="Player 3 Name">
+      <input type="tel" name="player3_contact" required placeholder="Player 3 Contact Number">
+      
+      <button type="submit" class="submit-btn">SUBMIT</button>
+    </form>
+    <div id="responseMsg" class="footer"></div>
+    <div class="footer" style="margin-top:14px;">
+      28 OCT &nbsp; | &nbsp; 11:00 AM &nbsp; | &nbsp; MANDI MAHAL<br>KHAMMAM
+    </div>
+  </div>
+  <script>
+    document.getElementById('registrationForm').onsubmit = async function(e){
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        "team_name": form.team_name.value,
+        "captain_name": form.captain_name.value,
+        "captain_contact": form.captain_contact.value,
+        "player1_name": form.player1_name.value,
+        "player1_contact": form.player1_contact.value,
+        "player2_name": form.player2_name.value,
+        "player2_contact": form.player2_contact.value,
+        "player3_name": form.player3_name.value,
+        "player3_contact": form.player3_contact.value,
+      };
+      // Google Apps Script endpoint URL
+      const endpoint = "https://script.google.com/macros/s/AKfycbxq3hxy7iOlm91tk549ngUZ3CbBnCgMYNgUeCL9HLQ0ixsMVG_5Ni4CdDreHDRQ3MMK/exec";
+      try {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const msg = await res.text();
+        document.getElementById('responseMsg').innerText = msg;
+        form.reset();
+      } catch (err) {
+        document.getElementById('responseMsg').innerText = "Error submitting form. Try again later.";
+      }
+    };
+  </script>
+</body>
+</html>
+
